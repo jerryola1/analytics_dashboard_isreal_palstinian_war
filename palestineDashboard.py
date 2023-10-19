@@ -624,7 +624,7 @@ app.layout = dbc.Container([
             dbc.Button("Click me!", color="secondary")
         ], width=4),
         dbc.Col([
-            dbc.Alert("Hello Bootstrap!", color="success")
+            dbc.Alert("This is a test!", color="success")
         ], width=8)
     ])
 ])
