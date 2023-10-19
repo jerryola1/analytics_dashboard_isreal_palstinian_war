@@ -622,10 +622,10 @@ app.layout = dbc.Container([
     dbc.Row([
         dbc.Col([
             dbc.Button("Click me!", color="secondary")
-        ], width=4),
+        ], width=5),
         dbc.Col([
             dbc.Alert("This is a test!", color="success")
-        ], width=8)
+        ], width=10)
     ])
 ])
 
