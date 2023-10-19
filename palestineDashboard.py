@@ -621,7 +621,7 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 app.layout = dbc.Container([
     dbc.Row([
         dbc.Col([
-            dbc.Button("Click me!", color="primary")
+            dbc.Button("Click me!", color="secondary")
         ], width=4),
         dbc.Col([
             dbc.Alert("Hello Bootstrap!", color="success")
