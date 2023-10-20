@@ -643,7 +643,7 @@ fig_injuries = px.bar(df, x=['Palestinian', 'Israeli'], y=[df['Palestinians_Kill
 
 
 app.layout = html.Div([
-    html.H1("Comparative Analysis Dashboard"),
+    html.H2("Comparative Analysis Dashboard"),
     dcc.Graph(figure=fig_injuries, id='injuries-bar-chart'),
     # You'll add more components and visualizations as you create them.
 ])
