@@ -3,6 +3,7 @@ from dash import dcc
 import dash
 import pandas as pd
 from dash.dependencies import Input, Output
+import plotly.express as px
 
 
 external_stylesheets = [
@@ -120,10 +121,10 @@ app.layout = html.Div(className='container-fluid alert alert-primary', style={'b
     ]),
 
 
-    # Tweet Insights Row 4
-    html.Div(className='row mb-3 py-3 col-12', children=[
-        html.Div(id='tweet-insights', className='col-12')
-    ]),
+    # # Tweet Insights Row 4
+    # html.Div(className='row mb-3 py-3 col-12 bg-danger', children=[
+    #     html.Div(id='tweet-insights', className='col-12')
+    # ]),
 
 
     # Wordcloud row 5
@@ -133,11 +134,13 @@ app.layout = html.Div(className='container-fluid alert alert-primary', style={'b
 
 
     # Main Content Row 6
-    html.Div(className='row pt-3 mb-3', children=[
+    html.Div(className='row pt-3 col-sm-6 mb-3', children=[
         # For the engagement-metrics and time-analysis
-        html.Div(className='row col-8', children=[
-            html.Div([dcc.Graph(id='engagement-metrics')],
-                     className='col-6 mb-3'),
+        html.Div(className='row col-8 col-sm-12', children=[
+            html.Div([dcc.Graph(
+                id='engagement-metrics')],
+                className='col-6 mb-3'),
+            
             html.Div([dcc.Graph(id='time-analysis')], className='col-6 mb-3')
         ]),
 
@@ -168,6 +171,17 @@ def update_total_tweets(selected_username):
         return f"Total Tweets: {total_tweets}"
     else:
         return "Total Tweets: N/A"
+    
+    
+@app.callback(
+    Output('engagement-metrics', 'figure'),
+    Input('username-dropdown', 'value')
+)
+def update_graph(selected_username):
+    filtered_df = df[df['Username'] == selected_username]
+    fig = px.bar(filtered_df, x='UTC Date', y='Likes count')
+    return fig
+
 
 
 # Run the app
