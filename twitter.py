@@ -66,7 +66,7 @@ time_range_options = [
 
 
 # Define the app layout
-app.layout = html.Div(className='container-fluid alert alert-primary', style={'backgroundColor': primary_colors['background'], 'textAlign': 'center'}, children=[
+app.layout = html.Div(className='container alert alert-primary', style={'backgroundColor': primary_colors['background'], 'textAlign': 'center'}, children=[
 
     # Header Row 1
     html.Div([
@@ -85,13 +85,26 @@ app.layout = html.Div(className='container-fluid alert alert-primary', style={'b
             className='col-12 col-md-4 my-1',
             # style={'marginLeft': 'auto', 'marginRight': 'auto'}
         ),
-        html.Div(dcc.Dropdown(
-            id='time-dropdown',
-            options=time_range_options,
-            style={'minWidth': '200px', 'maxWidth': '250px'}
-        ),
-            className='col-sm-3 col-md-4 my-1'
-        ),
+        
+        
+        # html.Div(dcc.Dropdown(
+        #     id='time-dropdown',
+        #     options=time_range_options,
+        #     style={'minWidth': '200px', 'maxWidth': '250px'}
+        # ),
+        #     className='col-sm-3 col-md-4 my-1'
+        # ),
+        
+        html.Div(
+    dcc.DatePickerRange(
+        id='date-picker-range',
+        start_date='2023-10-01',
+        end_date='2023-10-31',
+        display_format='YYYY-MM-DD'
+    ),
+    className='col-sm-3 col-md-4 my-1'
+),
+
 
         html.Div(dcc.Dropdown(
             id='hashtag-dropdown',
@@ -158,6 +171,17 @@ app.layout = html.Div(className='container-fluid alert alert-primary', style={'b
     ),
 
 
+html.Div(
+    className='row py-3 mb-3 bg-warning shadow rounded',
+    children=[
+        html.Div(
+            id='popularity-metrics',
+            className='col text-center shadow-sm p-3 mb-5 bg-white rounded',
+            # ... other properties
+        )
+    ]
+),
+
 
     # # Tweet Insights Row 4
     # html.Div(className='row mb-3 py-3 col-12 bg-danger', children=[
@@ -222,42 +246,6 @@ def update_graph(selected_username):
     return fig
 
 
-
-@app.callback(
-    Output('pie-chart-graph', 'figure'),
-    [Input('username-dropdown', 'value'),
-     Input('date-picker-range', 'start_date'),
-     Input('date-picker-range', 'end_date')]
-)
-def update_pie_chart(selected_username, start_date, end_date):
-    if selected_username and start_date and end_date:
-        # Filter data for selected username and date range
-        filtered_df = data[(data['tweets_username'] == selected_username) & 
-                           (data['tweets_utc_date'] >= start_date) & 
-                           (data['tweets_utc_date'] <= end_date)]
-        
-        # Concatenate all tweet texts into one long string
-        all_text = ' '.join(filtered_df['tweets_tweet'])
-        
-        # Use regex to find all mentions (assumes usernames don't contain spaces)
-        mentions = re.findall(r'[@#]\w+', all_text)
-        
-        # Count the occurrences of each mention
-        mention_counts = Counter(mentions)
-        
-        # Convert to DataFrame for plotting
-        mention_df = pd.DataFrame(mention_counts.items(), columns=['mention', 'count'])
-        
-        # Create pie chart figure
-        fig = px.pie(
-            mention_df, 
-            names='mention', 
-            values='count',
-            title=f'Most Mentioned Usernames/Hashtags by {selected_username} within selected date range'
-        )
-        return fig
-    else:
-        return dash.no_update
 
 
 
