@@ -4,6 +4,8 @@ import dash
 import pandas as pd
 from dash.dependencies import Input, Output
 import plotly.express as px
+import re
+from collections import Counter
 
 external_stylesheets = [
     'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css']
@@ -220,28 +222,45 @@ def update_graph(selected_username):
     return fig
 
 
+
 @app.callback(
     Output('pie-chart-graph', 'figure'),
-    [Input('username-dropdown', 'value')]
+    [Input('username-dropdown', 'value'),
+     Input('date-picker-range', 'start_date'),
+     Input('date-picker-range', 'end_date')]
 )
-def update_pie_chart(selected_username):
-    if selected_username:
-        # Filter data for selected username
-        filtered_df = data[data['tweets_username'] == selected_username]
+def update_pie_chart(selected_username, start_date, end_date):
+    if selected_username and start_date and end_date:
+        # Filter data for selected username and date range
+        filtered_df = data[(data['tweets_username'] == selected_username) & 
+                           (data['tweets_utc_date'] >= start_date) & 
+                           (data['tweets_utc_date'] <= end_date)]
         
-        # Aggregate data (e.g., count tweets per username)
-        agg_data = filtered_df.groupby('tweets_username').size().reset_index(name='tweet_count')
+        # Concatenate all tweet texts into one long string
+        all_text = ' '.join(filtered_df['tweets_tweet'])
+        
+        # Use regex to find all mentions (assumes usernames don't contain spaces)
+        mentions = re.findall(r'[@#]\w+', all_text)
+        
+        # Count the occurrences of each mention
+        mention_counts = Counter(mentions)
+        
+        # Convert to DataFrame for plotting
+        mention_df = pd.DataFrame(mention_counts.items(), columns=['mention', 'count'])
         
         # Create pie chart figure
         fig = px.pie(
-            agg_data, 
-            names='tweets_username', 
-            values='tweet_count',
-            title=f'Distribution of Tweets for {selected_username}'
+            mention_df, 
+            names='mention', 
+            values='count',
+            title=f'Most Mentioned Usernames/Hashtags by {selected_username} within selected date range'
         )
         return fig
     else:
         return dash.no_update
+
+
+
 
 
 
