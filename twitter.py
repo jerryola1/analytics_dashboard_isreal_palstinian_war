@@ -152,21 +152,26 @@ app.layout = html.Div(className='container alert alert-primary', style={'backgro
                     # Your pie chart or other chart components go here
                 ]
             ),
-            html.Div(
-                id='pie-chart',
-                className='col text-center p-3 mb-5 rounded',
-                children=[
-                    dcc.Graph(
-                        id='pie-chart-graph',
-                        config={'staticPlot': False},
-                        figure=px.pie(
-                            data,
-                            names='tweets_username',
-                            title='Distribution of Tweets Among Users'
-                        )
-                    )
-                ]
-            )
+            
+            
+            
+            
+            
+            # html.Div(
+            #     id='pie-chart',
+            #     className='col text-center p-3 mb-5 rounded',
+            #     children=[
+            #         dcc.Graph(
+            #             id='pie-chart-graph',
+            #             config={'staticPlot': False},
+            #             figure=px.pie(
+            #                 data,
+            #                 names='tweets_username',
+            #                 title='Distribution of Tweets Among Users'
+            #             )
+            #         )
+            #     ]
+            # )
         ]
     ),
 
@@ -247,6 +252,34 @@ def update_graph(selected_username):
 
 
 
+@app.callback(
+    Output('popularity-metrics', 'children'),
+    [Input('date-picker-range', 'start_date'),
+     Input('date-picker-range', 'end_date')]
+)
+def update_popularity_metrics(start_date, end_date):
+    if start_date and end_date:
+        # Filter data for the selected date range
+        filtered_df = data[(data['tweets_utc_date'] >= start_date) & 
+                           (data['tweets_utc_date'] <= end_date)]
+        
+        # Aggregate data to get total likes and retweets per housemate
+        agg_data = filtered_df.groupby('tweets_username').agg(
+            total_likes=pd.NamedAgg(column='tweets_likes_count', aggfunc='sum'),
+            total_retweets=pd.NamedAgg(column='tweets_retweet_count', aggfunc='sum')
+        ).reset_index()
+        
+        # Create bar chart figure
+        fig = px.bar(
+            agg_data, 
+            x='tweets_username', 
+            y=['total_likes', 'total_retweets'],
+            title='Popularity Metrics by Housemate'
+        )
+        
+        return dcc.Graph(figure=fig)
+    else:
+        return 'Select a date range'
 
 
 
