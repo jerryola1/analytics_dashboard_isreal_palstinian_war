@@ -193,7 +193,6 @@ html.Div(
     #     html.Div(id='tweet-insights', className='col-12')
     # ]),
 
-
     # Wordcloud row 5
     html.Div(className='row mb-3', children=[
         html.Div([dcc.Graph(id='word-cloud')], className='col-12')
@@ -222,7 +221,7 @@ html.Div(
 
     # Footer Row 7
     html.Div([
-        html.H1("Footer", style={
+        html.H2("Footer", style={
                 'color': primary_colors['text'], 'textAlign': 'center'})
     ], className="py-3", style={'gridColumn': 'span 12'})
 ])
