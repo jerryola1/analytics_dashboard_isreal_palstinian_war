@@ -193,10 +193,10 @@ html.Div(
     #     html.Div(id='tweet-insights', className='col-12')
     # ]),
 
-    # Wordcloud row 5
-    html.Div(className='row mb-3', children=[
-        html.Div([dcc.Graph(id='word-cloud')], className='col-12')
-    ]),
+    # # Wordcloud row 5
+    # html.Div(className='row mb-3', children=[
+    #     html.Div([dcc.Graph(id='word-cloud')], className='col-12')
+    # ]),
 
 
     # Main Content Row 6
