@@ -157,21 +157,21 @@ app.layout = html.Div(className='container alert alert-primary', style={'backgro
             
             
             
-            # html.Div(
-            #     id='pie-chart',
-            #     className='col text-center p-3 mb-5 rounded',
-            #     children=[
-            #         dcc.Graph(
-            #             id='pie-chart-graph',
-            #             config={'staticPlot': False},
-            #             figure=px.pie(
-            #                 data,
-            #                 names='tweets_username',
-            #                 title='Distribution of Tweets Among Users'
-            #             )
-            #         )
-            #     ]
-            # )
+            html.Div(
+                id='pie-chart',
+                className='col text-center p-3 mb-5 rounded',
+                children=[
+                    dcc.Graph(
+                        id='pie-chart-graph',
+                        config={'staticPlot': False},
+                        figure=px.pie(
+                            data,
+                            names='tweets_username',
+                            title='Distribution of Tweets Among Users'
+                        )
+                    )
+                ]
+            )
         ]
     ),
 
@@ -193,7 +193,7 @@ html.Div(
     #     html.Div(id='tweet-insights', className='col-12')
     # ]),
 
-    # # Wordcloud row 5
+    # Wordcloud row 5
     # html.Div(className='row mb-3', children=[
     #     html.Div([dcc.Graph(id='word-cloud')], className='col-12')
     # ]),
