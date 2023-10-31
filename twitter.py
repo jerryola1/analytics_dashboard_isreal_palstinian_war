@@ -221,7 +221,7 @@ html.Div(
 
     # Footer Row 7
     html.Div([
-        html.H2("Footer", style={
+        html.H3("Footer", style={
                 'color': primary_colors['text'], 'textAlign': 'center'})
     ], className="py-3", style={'gridColumn': 'span 12'})
 ])
