@@ -82,7 +82,7 @@ app.layout = html.Div(className='container alert alert-primary', style={'backgro
                 options=username_options,
                 style={'minWidth': '200px', 'maxWidth': '250px'}
             ),
-            className='col-12 col-md-4 my-1',
+            className='col-16 col-md-4 my-1',
             # style={'marginLeft': 'auto', 'marginRight': 'auto'}
         ),
         
