@@ -72,7 +72,7 @@ app.layout = html.Div(className='container alert alert-primary', style={'backgro
     html.Div([
         html.H1("BBNaija Reality TV Show Dashboard", style={
                 'color': primary_colors['text'], 'textAlign': 'center'})
-    ], className="py-3", style={'gridColumn': 'span 12'}),
+    ], className="py-2", style={'gridColumn': 'span 12'}),
 
     # Filter Row 2
     html.Div(className='row py-3 justify-content-center', children=[
