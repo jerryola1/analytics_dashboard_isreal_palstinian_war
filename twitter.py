@@ -102,7 +102,7 @@ app.layout = html.Div(className='container alert alert-primary', style={'backgro
         end_date='2023-10-31',
         display_format='YYYY-MM-DD'
     ),
-    className='col-sm-2 col-md-4 my-1'
+    className='col-sm-3 col-md-4 my-1'
 ),
 
 
