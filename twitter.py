@@ -87,13 +87,6 @@ app.layout = html.Div(className='container alert alert-primary', style={'backgro
         ),
         
         
-        # html.Div(dcc.Dropdown(
-        #     id='time-dropdown',
-        #     options=time_range_options,
-        #     style={'minWidth': '200px', 'maxWidth': '250px'}
-        # ),
-        #     className='col-sm-3 col-md-4 my-1'
-        # ),
         
         html.Div(
     dcc.DatePickerRange(
@@ -122,16 +115,6 @@ app.layout = html.Div(className='container alert alert-primary', style={'backgro
         #     className='col-sm-3 my-1'
         # ),
     ]),
-
-
-
-    # # Overview Metrics Row 3
-    # html.Div(className='row py-3 mb-3 bg-warning shadow rounded', children=[
-    #     html.Div(id='total-tweets', className='col-4 text-center'),
-    #     html.Div(id='unique-contributors', className='col-4'),
-    #     html.Div(id='avg-likes', className='col-4')
-    #     # html.Div(id='avg-retweets', className='col-3')
-    # ]),
 
 
     # Overview Metrics Row 3
@@ -186,17 +169,6 @@ html.Div(
         )
     ]
 ),
-
-
-    # # Tweet Insights Row 4
-    # html.Div(className='row mb-3 py-3 col-12 bg-danger', children=[
-    #     html.Div(id='tweet-insights', className='col-12')
-    # ]),
-
-    # Wordcloud row 5
-    # html.Div(className='row mb-3', children=[
-    #     html.Div([dcc.Graph(id='word-cloud')], className='col-12')
-    # ]),
 
 
     # Main Content Row 6
