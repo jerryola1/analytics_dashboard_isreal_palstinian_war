@@ -87,7 +87,6 @@ app.layout = html.Div(className='container alert alert-primary', style={'backgro
         ),
         
         
-        
         html.Div(
     dcc.DatePickerRange(
         id='date-picker-range',
@@ -107,13 +106,13 @@ app.layout = html.Div(className='container alert alert-primary', style={'backgro
             className='col-sm-4 col-md-4 my-1'
         ),
 
-        # html.Div(dcc.Dropdown(
-        #     id='sentiment-dropdown',
-        #     options=time_range_options,
-        #     style={'minWidth': '200px', 'maxWidth': '250px'}
-        # ),
-        #     className='col-sm-3 my-1'
-        # ),
+        html.Div(dcc.Dropdown(
+            id='sentiment-dropdown',
+            options=time_range_options,
+            style={'minWidth': '200px', 'maxWidth': '250px'}
+        ),
+            className='col-sm-3 my-1'
+        ),
     ]),
 
 
@@ -165,6 +164,16 @@ html.Div(
         html.Div(
             id='popularity-metrics',
             className='col text-center shadow-sm p-3 mb-5 bg-white rounded',
+            # ... other properties
+        )
+    ]
+),
+html.Div(
+    className='row py-3 mb-3 bg-warning shadow rounded',
+    children=[
+        html.Div(
+            id='popularity-metrics',
+            className='col-sm-1 text-center shadow-sm p-3 mb-5 bg-white rounded',
             # ... other properties
         )
     ]
