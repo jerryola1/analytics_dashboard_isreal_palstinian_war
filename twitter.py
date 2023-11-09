@@ -179,6 +179,9 @@ html.Div(
     ]
 ),
 
+html.Div(className='row py-3', children=[html.Div(id='map-row', className='map-class',
+                                                  
+)]   ),
 
     # Main Content Row 6
     html.Div(className='row pt-3 col-sm-6 mb-3', children=[
